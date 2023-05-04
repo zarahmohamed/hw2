@@ -95,6 +95,9 @@ puts ""
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
 
+Movie.destroy_all
+Studio.destroy_all
+
 new_movie = Movie.new
 new_movie["title"] = "Batman Begins"
 new_movie["year_released"] = "2005"
@@ -109,4 +112,16 @@ new_movie["rated"] = "PG-13"
 new_movie["studio_id"] = "1"
 new_movie.save
 
+new_movie = Movie.new
+new_movie["title"] = "The Dark Knight Rises"
+new_movie["year_released"] = "2012"
+new_movie["rated"] = "PG-13"
+new_movie["studio_id"] = "1"
+new_movie.save
+
+new_studio = Studio.new
+new_studio["name"] = "Warner Bros."
+new_studio.save
+
 puts "movies: #{Movie.all.count}"
+puts "studios: #{Studio.all.count}"
