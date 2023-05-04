@@ -102,4 +102,11 @@ new_movie["rated"] = "PG-13"
 new_movie["studio_id"] = "1"
 new_movie.save
 
+new_movie = Movie.new
+new_movie["title"] = "The Dark Knight"
+new_movie["year_released"] = "2008"
+new_movie["rated"] = "PG-13"
+new_movie["studio_id"] = "1"
+new_movie.save
+
 puts "movies: #{Movie.all.count}"
