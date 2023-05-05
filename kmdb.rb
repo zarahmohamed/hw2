@@ -278,6 +278,15 @@ role.save
 movies = Movie.all
 roles = Role.all 
 
+for movie in movies
+    studio = Studio.find_by({ "id" => movie["studio_id"] })
+    studio_name = studio["name"]
+    title = movie["title"]
+    year = movie["year_released"]
+    rating = movie["rated"]
+    puts "#{title}\t\t#{year}\t#{rating}\t#{studio_name}"
+  end
+
 for role in roles
     movie = Movie.find_by( "id" => role["movie_id"])
     movie_title = movie["title"]
