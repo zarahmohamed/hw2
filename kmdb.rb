@@ -79,53 +79,51 @@
 # TODO!
 
 # Prints a header for the movies output
-puts "Movies"
-puts "======"
-puts ""
 
 # Query the movies data and loop through the results to display the movies output.
 # TODO!
 
 # Prints a header for the cast output
-puts ""
-puts "Top Cast"
-puts "========"
-puts ""
 
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
 
+#Ensure duplicate data is removed
 Movie.destroy_all
 Studio.destroy_all
 Actor.destroy_all
 Role.destroy_all
 
+#Create studio and association
+new_studio = Studio.new
+new_studio["name"] = "Warner Bros."
+new_studio.save
 
+Warner = Studio.find_by({ "name" => "Warner Bros." })
+
+#Create movies
 new_movie = Movie.new
 new_movie["title"] = "Batman Begins"
 new_movie["year_released"] = "2005"
 new_movie["rated"] = "PG-13"
-new_movie["studio_id"] = "1"
+new_movie["studio_id"] = Warner["id"]
 new_movie.save
 
 new_movie = Movie.new
 new_movie["title"] = "The Dark Knight"
 new_movie["year_released"] = "2008"
 new_movie["rated"] = "PG-13"
-new_movie["studio_id"] = "1"
+new_movie["studio_id"] = Warner["id"]
 new_movie.save
 
 new_movie = Movie.new
 new_movie["title"] = "The Dark Knight Rises"
 new_movie["year_released"] = "2012"
 new_movie["rated"] = "PG-13"
-new_movie["studio_id"] = "1"
+new_movie["studio_id"] = Warner["id"]
 new_movie.save
 
-new_studio = Studio.new
-new_studio["name"] = "Warner Bros."
-new_studio.save
-
+#Create actors
 new_actor = Actor.new
 new_actor["name"] = "Christian Bale"
 new_actor.save
@@ -170,6 +168,7 @@ new_actor = Actor.new
 new_actor["name"] = "Anne Hathaway"
 new_actor.save
 
+#Create associations for roles
 Christian = Actor.find_by({ "name" => "Christian Bale" })
 Michael = Actor.find_by({ "name" => "Michael Caine" })
 Liam = Actor.find_by({ "name" => "Liam Neeson" })
@@ -185,6 +184,7 @@ Batman = Movie.find_by({ "title" => "Batman Begins" })
 DK = Movie.find_by({ "title" => "The Dark Knight" })
 DKR = Movie.find_by({ "title" => "The Dark Knight Rises" })
 
+#Create roles
 role = Role.new
 role["movie_id"] = Batman["id"]
 role["actor_id"] = Christian["id"]
@@ -275,8 +275,13 @@ role["actor_id"] = Anne["id"]
 role["character_name"] ="Selina Kyle"
 role.save
 
+#Print outputs
 movies = Movie.all
 roles = Role.all 
+
+puts "Movies"
+puts "======"
+puts ""
 
 for movie in movies
     studio = Studio.find_by({ "id" => movie["studio_id"] })
@@ -285,7 +290,12 @@ for movie in movies
     year = movie["year_released"]
     rating = movie["rated"]
     puts "#{title}\t\t#{year}\t#{rating}\t#{studio_name}"
-  end
+end
+
+puts ""
+puts "Top Cast"
+puts "========"
+puts ""
 
 for role in roles
     movie = Movie.find_by( "id" => role["movie_id"])
