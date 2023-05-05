@@ -276,3 +276,13 @@ role["character_name"] ="Selina Kyle"
 role.save
 
 movies = Movie.all
+roles = Role.all 
+
+for role in roles
+    movie = Movie.find_by( "id" => role["movie_id"])
+    movie_title = movie["title"]
+    actor = Actor.find_by( "id" => role["actor_id"])
+    actor_name = actor["name"]
+    role = role["character_name"]
+    puts "#{movie_title}\t\t#{actor_name}\t\t#{role}"
+end
