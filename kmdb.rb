@@ -275,7 +275,4 @@ role["actor_id"] = Anne["id"]
 role["character_name"] ="Selina Kyle"
 role.save
 
-puts "movies: #{Movie.all.count}"
-puts "studios: #{Studio.all.count}"
-puts "actors: #{Actor.all.count}"
-puts "roles: #{Role.all.count}"
+movies = Movie.all
